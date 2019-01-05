@@ -14,6 +14,7 @@ a `config` object as the gatsby config with the plugins.
 
 ```js
 const { getGatsbySchema } = require('graphql-gatsby');
+
 getGatsbySchema(config)
 .then(({ schema }) => {
   // `schema` is now a usable GraphQL schema
@@ -28,8 +29,7 @@ Update your server source code to reflect the following changes:
 ```js
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
-const graphqlGatsby = require('graphql-gatsby-express'); // <-- add this 
-line
+const graphqlGatsby = require('graphql-gatsby-express'); // <-- add this line
 
 const app = express();
 const config = undefined; // Optional
@@ -46,8 +46,7 @@ app.listen(3000);
 Update your server source code to reflect the following changes:
 ```js
 const Koa = require('koa');
-const graphqlGatsby = require('graphql-gatsby-koa'); // <-- add this 
-line 
+const graphqlGatsby = require('graphql-gatsby-koa'); // <-- add this line 
 
 const app = new Koa();
 const config = undefined; // Optional
@@ -59,8 +58,7 @@ app.listen({ port: 3000 });
 
 ### With apollo-server
 
-Note: If you already have an apollo server, you may want to look into 
-[Schema stitching](#schema-stitching)
+Note: If you already have an apollo server, you may want to look into [Schema stitching](#schema-stitching)
 ```js
 const { ApolloServer } = require('apollo-server');
 const { getGatsbySchema } = require('graphql-gatsby');
@@ -87,8 +85,7 @@ const next = require('next')({ dev });
 const handle = next.getRequestHandler();
 
 next.prepare()
-.then(getGatsbySchema) // <-- add this line (or `.then(() => 
-getGatsbySchema(config))`)
+.then(getGatsbySchema) // <-- add this line (or `.then(() => getGatsbySchema(config))`)
 .then(({ schema }) => {
   const app = express();
   const apolloServer = new ApolloServer({ schema });
@@ -133,9 +130,7 @@ export default server;
 
 ### Schema stitching
 
-If you are already running a graphql server with your own schema, you 
-can stitch the Gatsby schema together with yours, using the 
-`graphql-tools` package.
+If you are already running a graphql server with your own schema, you can stitch the Gatsby schema together with yours, using the `graphql-tools` package.
 
 ```js
 const { mergeSchemas } = require('graphql-tools');
