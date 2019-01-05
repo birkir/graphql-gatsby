@@ -6,6 +6,17 @@ schema and resolvers without using the Gatsby ecosystem in whole.
 You can put a `gatsby-config.js` in your project root directory, or pass 
 a `config` object as the gatsby config with the plugins.
 
+### Index
+
+- Usage
+  - [Manual usage](#manual-usage)
+  - [Express](#with-express)
+  - [Koa](#with-koa)
+  - [NextJS](#with-nextjs)
+  - [Razzle](#with-razzle)
+- Advanced Topics
+   - [Schema stitching](#schema-stitching)
+
 ## Usage
 
 ### Manual usage
@@ -71,7 +82,7 @@ getGatsbySchema(config).then(({ schema }) => {
 });
 ```
 
-### NextJS
+### With NextJS
 
 ```js
 // server.js
@@ -101,7 +112,7 @@ next.prepare()
 });
 ```
 
-### Razzle
+### With Razzle
 
 ```js
 // src/server.js
