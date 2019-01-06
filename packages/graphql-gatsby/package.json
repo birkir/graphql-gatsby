@@ -1,6 +1,6 @@
 {
   "name": "graphql-gatsby",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "GraphQL tools for standalone Gatsby schema",
   "keywords": [
     "gatsby",

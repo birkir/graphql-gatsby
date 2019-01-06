@@ -1,6 +1,6 @@
 {
   "name": "graphql-gatsby-express",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Express middleware for graphql-express",
   "author": "Birkir Gudjonsson <birkir.gudjonsson@gmail.com>",
   "homepage": "https://github.com/birkir/graphql-gatsby#readme",
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "apollo-server-express": "2.3.1",
-    "graphql-gatsby": "^0.0.4"
+    "graphql-gatsby": "^0.0.5"
   },
   "publishConfig": {
     "access": "public"
