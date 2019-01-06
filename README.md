@@ -227,3 +227,18 @@ Update your package.json and then you can run `yarn export` like usual (remember
     "export": "sh ./export.sh"
   }
 }
+```
+
+## Common Problems
+
+### message: Cannot use GraphQLSchema "[object Object]" from another module or realm
+
+This is because you are running newer version of GraphQL than Gatsby. You will have to update your package.json with the following resolution:
+
+```json
+{
+  "resolutions": {
+    "graphql": "14.0.2" // or the version you want to use
+  }
+}
+```

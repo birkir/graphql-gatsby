@@ -1,0 +1,28 @@
+{
+  "name": "with-apollo",
+  "version": "2.0.0",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "export": "./scripts/export.sh",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "apollo-boost": "^0.1.16",
+    "express": "^4.16.4",
+    "gatsby-source-medium": "^2.0.2",
+    "graphql": "^14.0.2",
+    "graphql-gatsby-express": "^0.1.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "^7.0.2",
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0",
+    "react-apollo": "^2.1.11",
+    "react-dom": "^16.7.0"
+  },
+  "author": "Birkir Gudjonsson <birkir.gudjonsson@gmail.com>",
+  "license": "MIT",
+  "resolutions": {
+    "graphql": "14.0.2"
+  }
+}
