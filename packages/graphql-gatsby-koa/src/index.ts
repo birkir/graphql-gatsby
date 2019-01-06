@@ -6,8 +6,8 @@ interface GatsbyMiddlewareOptions {
   config?: GetGatsbySchemaConfig;
 }
 
-export default {
-  initialize(config: GetGatsbySchemaConfig) {
+module.exports = {
+  bootstrap(config: GetGatsbySchemaConfig) {
     return getGatsbySchema(config);
   },
   applyMiddleware({ app, config }: GatsbyMiddlewareOptions) {

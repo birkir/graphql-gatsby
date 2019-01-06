@@ -17,6 +17,11 @@ process.on(`unhandledRejection`, (reason, p) => {
   report.panic(reason)
 })
 
+const IDLE = 0
+const INITIALIZING = 1;
+const BOOTSTRAPPED = 2;
+let status = IDLE;
+
 module.exports = async (args) => {
 
   const graphqlRunner = (query, context = {}) => {
@@ -24,19 +29,18 @@ module.exports = async (args) => {
     return graphql(schema, query, context, context, context)
   }
 
-  const state = store.getState();
-
-  if (state.init) {
-    if (state.jobs.active.length > 0) {
-      console.log('GRAPHQL_GATSBY: WAITING');
+  if (status > IDLE) {
+    if (status === INITIALIZING) {
       return new Promise((resolve) => {
-        store.on('BOOTSTRAP_FINISHED', () =>
-          resolve({ graphqlRunner, store, schema: store.getState().schema }));
+        emitter.on('BOOTSTRAP_FINISHED', () => {
+          resolve({ graphqlRunner, store, schema: store.getState().schema })
+        });
       });
     }
-    console.log('GRAPHQL_GATSBY: NOT WAITING');
     return { graphqlRunner, store, schema: store.getState().schema };
   }
+
+  status = INITIALIZING;
 
   const spanArgs = args.parentSpan ? { childOf: args.parentSpan } : {}
   const bootstrapSpan = tracer.startSpan(`bootstrap`, spanArgs)
@@ -142,6 +146,8 @@ module.exports = async (args) => {
       report.info(`bootstrap finished - ${process.uptime()} s`)
       report.log(``)
 
+      status = BOOTSTRAPPED;
+
       // onPostBootstrap
       activity = report.activityTimer(`onPostBootstrap`, {
         parentSpan: bootstrapSpan,
@@ -172,6 +178,8 @@ module.exports = async (args) => {
     report.info(`bootstrap finished - ${process.uptime()} s`)
     report.log(``)
     emitter.emit(`BOOTSTRAP_FINISHED`)
+
+    status = BOOTSTRAPPED;
 
     return {
       store,

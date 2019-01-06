@@ -160,24 +160,42 @@ getGatsbySchema().then(({ schema: gatsbySchema }) => {
 
 ### NextJS Export
 
-> This API is not yet available
-
 It's possible to make the library work with NextJS export feature.
+
+`npm install -S graphql promise-retry isomorphic-fetch`
 
 ```js
 // next.config.js
-const gql = require('graphql-tag');
-const { getExportClient } = require('graphql-gatsby-next');
+const { graphql } = require('graphql');
+const graphqlGatsby = require('graphql-gatsby-express');
+const fetch = require('isomorphic-fetch');
+const promiseRetry = require('promise-retry');
+
+const port = process.env.PORT || 3000;
 
 module.exports = {
   exportPathMap: async (pathMap, options) => {
-    const client = await getExportClient();
 
-    // use the client to query resources needed
-    // to build custom routes
-    const result = await client.query({
-      query: gql` { ... } `
-    });
+    // Wait until server becomes ready in export mode
+    if (process.argv[1].match(/next-export$/) && !options.dev) {
+      await promiseRetry((retry, number) => {
+        console.log('waiting for server...', number);
+        return fetch(`http://localhost:${port}/graphql?query=%7Bsite%7Bid%7D%7D`)
+        .then(res => res.status !== 200 && new Error('Failure'))
+        .catch(retry);
+      });
+      await new Promise(resolve => setTimeout(resolve, 1000)); // sjattlari
+    }
+
+    const { schema } = await graphqlGatsby.bootstrap();
+
+    const result = await graphql(schema, `
+      query {
+        siteMetadata {
+          title
+        }
+      }
+    `);
 
     return {
       ...pathMap
@@ -186,3 +204,26 @@ module.exports = {
   }
 };
 ```
+
+Export bash script to ensure having the server running while generating pages (also ensures the server will be killed upon exit). You can run `chmod +x ./export.sh` to make the script executable.
+
+```bash
+# ./export.sh
+
+#!/bin/sh
+trap "exit" INT TERM ERR
+trap "kill 0" EXIT
+
+NODE_ENV=production node server.js > /dev/null 2>&1 &
+./node_modules/.bin/next export
+```
+
+Update your package.json and then you can run `yarn export` like usual (remember to build the server first with `yarn build`).
+
+```json
+// package.json
+{
+  "scripts": {
+    "export": "sh ./export.sh"
+  }
+}
