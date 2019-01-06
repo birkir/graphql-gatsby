@@ -3,7 +3,7 @@ import pkgDir from 'pkg-dir';
 import { GraphQLSchema } from 'graphql';
 import { Store } from 'redux';
 
-const gatsby = require('./gatsby.js');
+const gatsby = require('../gatsby.js');
 
 type Plugin = string | {
   resolve: string;
