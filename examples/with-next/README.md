@@ -1,4 +1,4 @@
-[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/zeit/next.js/tree/master/examples/with-apollo)
+[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/birkir/graphql-gatsby/tree/master/examples/with-next)
 # Apollo Example
 
 ## Demo
@@ -22,7 +22,7 @@ yarn create next-app --example with-apollo with-apollo-app
 Download the example:
 
 ```bash
-curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/with-apollo
+curl https://codeload.github.com/birkir/graphql-gatsby/tar.gz/canary | tar -xz --strip=2 graphql-gatsby/examples/with-next
 cd with-apollo
 ```
 
