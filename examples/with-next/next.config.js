@@ -1,5 +1,5 @@
 const graphqlGatsby = require('graphql-gatsby-express');
-const fetch = require('isomorphic-fetch');
+const fetch = require('isomorphic-unfetch');
 const promiseRetry = require('promise-retry');
 const ApolloClient = require('apollo-boost').default;
 const gql = require('graphql-tag');
