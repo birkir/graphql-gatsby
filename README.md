@@ -88,20 +88,21 @@ getGatsbySchema(config).then(({ schema }) => {
 // server.js
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-const { getGatsbySchema } = require('graphql-gatsby');
+const graphqlGatsby = require('graphql-gatsby-express'); // <-- add this line
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const next = require('next')({ dev });
 const handle = next.getRequestHandler();
 
-next.prepare()
-.then(getGatsbySchema) // <-- add this line (or `.then(() => getGatsbySchema(config))`)
-.then(async ({ schema }) => {
-  const app = express();
-  const apolloServer = new ApolloServer({ schema });
+const config = undefined;
+graphqlGatsby.bootstrap(config); // <-- add this line (optional)
 
-  await apolloServer.applyMiddleware({ app });
+next.prepare()
+.then(async () => {
+  const app = express();
+
+  await graphqlGatsby.applyMiddleware({ app }); // <-- add this line
 
   app.get('*', (req, res) => handle(req, res));
 
