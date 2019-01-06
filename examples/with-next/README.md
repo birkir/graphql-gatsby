@@ -22,7 +22,7 @@ yarn create next-app --example with-apollo with-apollo-app
 Download the example:
 
 ```bash
-curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/with-apollo
+curl https://codeload.github.com/birkir/graphql-gatsby/tar.gz/canary | tar -xz --strip=2 graphql-gatsby/examples/with-next
 cd with-apollo
 ```
 
