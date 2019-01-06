@@ -1,4 +1,4 @@
-import { ApolloServer, ServerRegistration } from 'apollo-server-express';
+import { ApolloServer, ServerRegistration, gql } from 'apollo-server-express';
 import { getGatsbySchema, GetGatsbySchemaConfig } from 'graphql-gatsby';
 
 interface GatsbyMiddlewareOptions {
@@ -6,14 +6,29 @@ interface GatsbyMiddlewareOptions {
   config?: GetGatsbySchemaConfig;
 }
 
-export default {
+module.exports = {
   applyMiddleware({ app, config }: GatsbyMiddlewareOptions) {
-    return getGatsbySchema(config).then(({ schema }) => {
-      const server = new ApolloServer({
-        schema
-      });
+    const typeDefs = gql`
+      type Query {
+        loading: Boolean
+      }
+    `;
 
-      return server.applyMiddleware({ app });
+    const resolvers = {
+      Query: {
+        loading: () => true
+      },
+    };
+
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
     });
+
+    getGatsbySchema(config).then(({ schema }) => {
+      (server as any).schema = schema;
+    });
+
+    server.applyMiddleware({ app });
   }
 }
