@@ -16,7 +16,7 @@ const config = {
   }]
 };
 
-graphqlGatsby.initialize(config);
+graphqlGatsby.bootstrap(config);
 
 next.prepare()
 .then(async () => {

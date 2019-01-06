@@ -1,4 +1,3 @@
-const { graphql } = require('graphql');
 const graphqlGatsby = require('graphql-gatsby-express');
 const fetch = require('isomorphic-fetch');
 const promiseRetry = require('promise-retry');
@@ -46,7 +45,7 @@ module.exports = {
         ...posts
       }
     } else {
-      await graphqlGatsby.initialize();
+      await graphqlGatsby.bootstrap();
     }
 
     return pathMap;
