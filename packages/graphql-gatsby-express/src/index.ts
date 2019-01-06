@@ -25,10 +25,10 @@ module.exports = {
       resolvers,
     });
 
-    getGatsbySchema(config).then(({ schema }) => {
+    server.applyMiddleware({ app });
+
+    return getGatsbySchema(config).then(({ schema }) => {
       (server as any).schema = schema;
     });
-
-    server.applyMiddleware({ app });
   }
 }

@@ -97,11 +97,11 @@ const handle = next.getRequestHandler();
 
 next.prepare()
 .then(getGatsbySchema) // <-- add this line (or `.then(() => getGatsbySchema(config))`)
-.then(({ schema }) => {
+.then(async ({ schema }) => {
   const app = express();
   const apolloServer = new ApolloServer({ schema });
 
-  apolloServer.applyMiddleware({ app });
+  await apolloServer.applyMiddleware({ app });
 
   app.get('*', (req, res) => handle(req, res));
 
@@ -126,15 +126,13 @@ import graphqlGatsby from 'graphql-gatsby-express'; // <-- add this line
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
 const server = express();
-server
-  .disable('x-powered-by')
-  .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
-
-// ...
 
 server.applyMiddleware({ app: server }); // <-- add this line
 
-export default server;
+server
+  .disable('x-powered-by')
+  .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
+// ...
 ```
 
 ## Advanced topics

@@ -8,29 +8,27 @@ interface GatsbyMiddlewareOptions {
 
 export default {
   applyMiddleware({ app, config }: GatsbyMiddlewareOptions) {
+    const typeDefs = gql`
+      type Query {
+        loading: Boolean
+      }
+    `;
+
+    const resolvers = {
+      Query: {
+        loading: () => true
+      },
+    };
+
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+    });
+
+    server.applyMiddleware({ app });
+
     return getGatsbySchema(config).then(({ schema }) => {
-      const typeDefs = gql`
-        type Query {
-          loading: Boolean
-        }
-      `;
-
-      const resolvers = {
-        Query: {
-          loading: () => true
-        },
-      };
-
-      const server = new ApolloServer({
-        typeDefs,
-        resolvers,
-      });
-
-      getGatsbySchema(config).then(({ schema }) => {
-        (server as any).schema = schema;
-      });
-
-      server.applyMiddleware({ app });
+      (server as any).schema = schema;
     });
   }
 }
