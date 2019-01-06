@@ -1,7 +1,7 @@
 {
   "name": "graphql-gatsby",
-  "version": "0.0.0",
-  "description": "> TODO: description",
+  "version": "0.0.1",
+  "description": "GraphQL tools for standalone Gatsby schema",
   "keywords": [
     "gatsby",
     "graphql",
@@ -12,8 +12,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+    "lib": "lib"
   },
   "files": [
     "lib"
@@ -27,5 +26,24 @@
   },
   "bugs": {
     "url": "https://github.com/birkir/graphql-gatsby/issues"
+  },
+  "dependencies": {
+    "gatsby": "2.0.85",
+    "graphql": "14.0.2",
+    "lodash": "4.17.11",
+    "pkg-dir": "3.0.0",
+    "react": "16.7.0",
+    "react-dom": "16.7.0",
+    "slash": "2.0.0"
+  },
+  "resolutions": {
+    "graphql": "14.0.2"
+  },
+  "devDependencies": {
+    "@types/pkg-dir": "^2.0.0",
+    "typescript": "^3.2.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
