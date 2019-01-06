@@ -167,11 +167,11 @@ It's possible to make the library work with NextJS export feature.
 ```js
 // next.config.js
 const gql = require('graphql-tag');
-const { exportClient } = require('graphql-gatsby-next');
+const { getExportClient } = require('graphql-gatsby-next');
 
 module.exports = {
   exportPathMap: async (pathMap, options) => {
-    const client = await exportClient();
+    const client = await getExportClient();
 
     // use the client to query resources needed
     // to build custom routes

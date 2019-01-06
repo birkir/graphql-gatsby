@@ -27,6 +27,7 @@ export function getGatsbySchema(config?: GetGatsbySchemaConfig): Promise<GetGats
   const directory = pkgDir.sync(process.cwd());
 
   const program = {
+    init: true,
     directory,
     sitePackageJson: directory ? require.resolve(path.join(directory, 'package.json')) : {},
     prefixPaths: false,

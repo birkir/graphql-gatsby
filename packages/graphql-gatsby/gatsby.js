@@ -18,6 +18,26 @@ process.on(`unhandledRejection`, (reason, p) => {
 })
 
 module.exports = async (args) => {
+
+  const graphqlRunner = (query, context = {}) => {
+    const schema = store.getState().schema
+    return graphql(schema, query, context, context, context)
+  }
+
+  const state = store.getState();
+
+  if (state.init) {
+    if (state.jobs.active.length > 0) {
+      console.log('GRAPHQL_GATSBY: WAITING');
+      return new Promise((resolve) => {
+        store.on('BOOTSTRAP_FINISHED', () =>
+          resolve({ graphqlRunner, store, schema: store.getState().schema }));
+      });
+    }
+    console.log('GRAPHQL_GATSBY: NOT WAITING');
+    return { graphqlRunner, store, schema: store.getState().schema };
+  }
+
   const spanArgs = args.parentSpan ? { childOf: args.parentSpan } : {}
   const bootstrapSpan = tracer.startSpan(`bootstrap`, spanArgs)
 
@@ -44,9 +64,9 @@ module.exports = async (args) => {
     parentSpan: bootstrapSpan,
   })
   activity.start()
-  
+
   let config = args.config;
-  
+
   if (!config) {
     config = await preferDefault(
       getConfigFile(program.directory, `gatsby-config`)
@@ -97,11 +117,6 @@ module.exports = async (args) => {
   activity.start()
   await require(`gatsby/dist/schema`).build({ parentSpan: activity.span })
   activity.end()
-
-  const graphqlRunner = (query, context = {}) => {
-    const schema = store.getState().schema
-    return graphql(schema, query, context, context, context)
-  }
 
   activity = report.activityTimer(`onPreExtractQueries`, {
     parentSpan: bootstrapSpan,

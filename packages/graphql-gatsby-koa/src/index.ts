@@ -7,6 +7,9 @@ interface GatsbyMiddlewareOptions {
 }
 
 export default {
+  initialize(config: GetGatsbySchemaConfig) {
+    return getGatsbySchema(config);
+  },
   applyMiddleware({ app, config }: GatsbyMiddlewareOptions) {
     const typeDefs = gql`
       type Query {
