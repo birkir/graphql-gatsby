@@ -1,12 +1,19 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "tsc -b ./packages/*",
+    "test": "lerna run test",
+    "clean": "rimraf packages/**/lib"
+  },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
     "@types/node": "10.12.18",
     "lerna": "^3.4.3",
+    "rimraf": "2.6.3",
     "typescript": "3.2.2"
   }
 }

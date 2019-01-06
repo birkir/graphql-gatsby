@@ -7,6 +7,11 @@
     "sourceMap": true,
     "strict": true,
     "composite": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "lib": [
+      "dom",
+      "es2015",
+      "esnext.asynciterable"
+    ],
   }
 }
