@@ -39,7 +39,6 @@ getGatsbySchema(config)
 Update your server source code to reflect the following changes:
 ```js
 const express = require('express');
-const graphqlHTTP = require('express-graphql');
 const graphqlGatsby = require('graphql-gatsby-express'); // <-- add this line
 
 const app = express();
@@ -234,12 +233,12 @@ Update your package.json and then you can run `yarn export` like usual (remember
 
 ### message: Cannot use GraphQLSchema "[object Object]" from another module or realm
 
-This is because you are running newer version of GraphQL than Gatsby. You will have to update your package.json with the following resolution:
+This is because you are running newer version of GraphQL than Gatsby. You will have to update your package.json with the following resolution (or the version you want to use)
 
 ```json
 {
   "resolutions": {
-    "graphql": "14.0.2" // or the version you want to use
+    "graphql": "14.0.2"
   }
 }
 ```
