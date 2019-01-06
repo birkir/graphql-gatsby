@@ -1,5 +1,7 @@
 import path from 'path';
 import pkgDir from 'pkg-dir';
+import { GraphQLSchema } from 'graphql';
+import { Store } from 'redux';
 
 const gatsby = require('./gatsby.js');
 
@@ -15,8 +17,9 @@ export interface GetGatsbySchemaConfig {
 }
 
 export interface GetGatsbySchemaResult {
-  schema: any;
-  store: any;
+  schema: GraphQLSchema;
+  store: Store;
+  graphqlRunner(query: any, context: any): void;
 }
 
 export function getGatsbySchema(config?: GetGatsbySchemaConfig): Promise<GetGatsbySchemaResult> {

@@ -40,7 +40,9 @@
     "graphql": "14.0.2"
   },
   "devDependencies": {
+    "@types/graphql": "14.0.4",
     "@types/pkg-dir": "^2.0.0",
+    "redux": "4.0.1",
     "typescript": "^3.2.2"
   },
   "publishConfig": {
