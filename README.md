@@ -157,3 +157,32 @@ getGatsbySchema().then(({ schema: gatsbySchema }) => {
   // `schema` is now ready to be used in an graphql server
 });
 ```
+
+### NextJS Export
+
+> This API is not yet available
+
+It's possible to make the library work with NextJS export feature.
+
+```js
+// next.config.js
+const gql = require('graphql-tag');
+const { exportClient } = require('graphql-gatsby-next');
+
+module.exports = {
+  exportPathMap: async (pathMap, options) => {
+    const client = await exportClient();
+
+    // use the client to query resources needed
+    // to build custom routes
+    const result = await client.query({
+      query: gql` { ... } `
+    });
+
+    return {
+      ...pathMap
+      // ... your custom routes
+    };
+  }
+};
+```
