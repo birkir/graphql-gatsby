@@ -1,4 +1,5 @@
 .cache
 .next
+public
 yarn.lock
 out

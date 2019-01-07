@@ -1,11 +1,26 @@
-# `graphql-gatsby-express`
+# graphql-gatsby-express
 
-> TODO: description
+## Install
+
+```bash
+npm install --save graphql-gatsby-express
+```
 
 ## Usage
 
-```
-const graphqlGatsbyExpress = require('graphql-gatsby-express');
+```js
+const express = require('express');
+const graphqlGatsby = require('graphql-gatsby-express'); // <-- add this line
 
-// TODO: DEMONSTRATE API
+const app = express();
+const config = undefined; // Optional
+
+graphqlGatsby.applyMiddleware({ app, config }); // <-- add this line
+
+app.listen(3000);
 ```
+
+
+## Problems
+
+Report problems to GitHub Issue Tracker
