@@ -86,7 +86,6 @@ getGatsbySchema(config).then(({ schema }) => {
 ```js
 // server.js
 const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
 const graphqlGatsby = require('graphql-gatsby-express'); // <-- add this line
 
 const port = parseInt(process.env.PORT, 10) || 3000;
