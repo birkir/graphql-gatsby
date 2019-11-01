@@ -31,7 +31,7 @@
   "dependencies": {
     "gatsby": "2.0.85",
     "graphql": "14.0.2",
-    "lodash": "4.17.11",
+    "lodash": "4.17.15",
     "pkg-dir": "3.0.0",
     "react": "16.7.0",
     "react-dom": "16.7.0",
