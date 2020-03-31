@@ -15,7 +15,7 @@
     "graphql": "^14.0.2",
     "graphql-gatsby-express": "0.1.1",
     "isomorphic-unfetch": "^3.0.0",
-    "next": "^8.0.0-canary.2",
+    "next": "^9.3.3",
     "promise-retry": "^1.1.1",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
