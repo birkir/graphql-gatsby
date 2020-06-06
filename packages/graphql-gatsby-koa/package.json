@@ -27,7 +27,7 @@
     "typescript": "^3.2.2"
   },
   "dependencies": {
-    "apollo-server-koa": "2.3.1",
+    "apollo-server-koa": "2.14.2",
     "graphql-gatsby": "^1.0.1"
   },
   "publishConfig": {
